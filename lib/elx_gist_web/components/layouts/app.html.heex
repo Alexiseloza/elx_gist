@@ -1,0 +1,132 @@
+<header class="flex justify-between items-center px-6 py-3 bg-elxDark">
+<div class="flex relative">
+<a href={~p"/"}>
+<img src="/images/gist-logo.svg" alt="Logo" class="h-8 w-auto" />
+</a>
+<a href={~p"/"} class="mr-6">
+<div class="text-white text-2xl font-brand font-bold text-3xl ">Gist</div>
+</a>
+<div>
+  <input
+  type="text"
+  class="rounded-lg focus:outline-none focus:outline-pink-400 focus:ring-0 px-3 py-1 focus:outline-2 bg-elxDark-dark text-white "
+  placeholder="Search..."
+  />
+  <button class="mt-2 mr-4 ml-2 text-white text-[1rem] font-brand font-bold hover:text-elxDark-light">All gists</button>
+</div>
+</div>
+
+<div class="relative">
+    <button
+      class="img-down-arrow"
+      type="button"
+      id="user-menu-button"
+      phx-click={ElxGistWeb.Layouts.App.toggle_dropdown_menu()}
+
+    >
+        <img src="/images/user-image.svg"  alt="User IMG" class="w-8 h-8 round-image-padding"/>
+    </button>
+
+  <div
+  id="dropdown_menu"
+  phx-click_away={ElxGistWeb.Layouts.App.toggle_dropdown_menu()}
+  class="dropdown-menu-arrow absolute right-0 mt-2 w-48 bg-elxDark rounded-lg shadow-xl border border-white"
+  hidden="true"
+
+  >
+  <%= if @current_user do%>
+   <.link href={~p"/users/settings"}
+   class="menu-item border-b border-white border-opacity-50"
+   role="menuitem"
+   tabindex="-1"
+   method="get"
+   id="user-menu-item-0"
+   >
+  Signed in as <%= @current_user.email %>
+   </.link>
+   <.link href="#"
+   class="menu-item "
+   role="menuitem"
+   tabindex="-1"
+   method="get"
+   id="user-menu-item-1"
+   >
+     Your gist
+   </.link>
+
+   <.link href="#"
+   class="menu-item "
+   role="menuitem"
+   tabindex="-1"
+   method="get"
+   id="user-menu-item-2"
+   >
+     Saved gist
+   </.link>
+
+   <.link href={~p"/users/log_out"}
+   class="menu-item "
+   role="menuitem"
+   tabindex="-1"
+   method="delete"
+   id="user-menu-item-3"
+   >
+    Sign Out
+   </.link>
+  <% else %>
+   <.link href={~p"/users/log_in"}
+   class="menu-item-1 border-b border-white border-opacity-50"
+   role="menuitem"
+   tabindex="-1"
+   method="get"
+   id="user-menu-item-0"
+   >
+   Sign In
+   </.link>
+    <.link href={~p"/users/register"}
+   class="menu-item-1"
+   role="menuitem"
+   tabindex="-1"
+   method="get"
+   id="user-menu-item-1"
+   >
+   Register
+   </.link>
+  <% end %>
+  </div>
+</div>
+</header>
+
+<main>
+ <.flash_group flash={@flash} />
+<%= @inner_content %>
+
+</main>
+
+<footer
+class="h-[120px] w-full flex justify-center text-white px-16 py-20 font-brand font-regular text-xs"
+>
+<div class="w-full px-10">
+<div class="border-t-[1px] border-white w-full">
+<div class="flex items-center space-x-2 py-6">
+  <img src="/images/gist-logo.svg" alt="Logo" class="h-8 w-auto" />
+  <span class="text-sm font-medium tracking-wide uppercase">©</span>
+    <p> Elixir Gist 2023 </p>
+    <div>
+    <a href={~p"/"} target="_blank" rel="noopener noreferrer" aria-label="" title="Twitter" class="text-elxRed px-4 hover:underline">
+    <i class="">Terms</i>
+     </a>
+    <a href={~p"/"} target="_blank" rel="noopener noreferrer" aria-label="" title="GitHub" class="text-elxRed px-4 hover:underline" >
+    <i class="">Privacy</i>
+    </a>
+     <a href={~p"/"} target="_blank" rel="noopener noreferrer" aria-label="" title="GitHub" class="text-elxRed px-4 hover:underline" >
+    <i class="">About Us</i>
+    </a>
+    </div>
+</div>
+</div>
+
+
+
+</div>
+</footer>
